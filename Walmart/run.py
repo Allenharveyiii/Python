@@ -1,13 +1,15 @@
-import Walmart
-
+from Walmart import Walmart as Wal
+import json
 #Walmart.search(query='Google Home')
 
-thisDict = {
-    'Test1': 1,
-    'Test2': 2,
-    'Test3': {
-        'SubItem1': 1,
-        'SubItem2': 2
-    }
-}
-print(thisDict['Test3']['SubItem2'])
+w = Wal();
+
+parsedJson = json.loads(w.search('ipod').content)
+for item in parsedJson['items']:
+    print('Name: {}'.format(item['name']))
+    try:
+        print('MSRP: {}'.format(item['msrp']))
+    except:
+        print('MSRP: None')
+    print('\n')
+#print(w.productLookup())
